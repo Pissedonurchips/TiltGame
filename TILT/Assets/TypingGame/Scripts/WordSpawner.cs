@@ -4,18 +4,26 @@ using UnityEngine;
 
 public class WordSpawner : MonoBehaviour
 {
-    [SerializeField] private int spawnRate = 1;
-    [SerializeField] private int destroyTimer = 3;
+    [SerializeField] private float spawnrate;
     private bool[] spawnPointsUsed;
     private List<GameObject> activeWords = new List<GameObject>();
     [SerializeField] private GameObject[] correctWordPrefabs;
     [SerializeField] private GameObject[] incorrectWordPrefabs;
     [SerializeField] private GameObject[] incorrectWordPrefabs2;
-
+    private WordLists wordLists;
     [SerializeField] private Transform[] spawnPoints;
 
     void Start()
     {
+    
+    wordLists = FindObjectOfType<WordLists>();
+
+    if (wordLists == null)
+    {
+        Debug.LogError("WordLists script not found in the scene.");
+        return;
+    }
+
         Debug.Log("Spawn Points Count: " + spawnPoints.Length);
 
         for (int i = 0; i < spawnPoints.Length; i++)
@@ -26,34 +34,97 @@ public class WordSpawner : MonoBehaviour
         StartCoroutine(SpawnWords());
     }
 
-    private IEnumerator SpawnWords()
-    {
-        while (true)
+    private void Update()
         {
-            float startTime = Time.realtimeSinceStartup;
-
-            GameObject correctWord = correctWordPrefabs[Random.Range(0, correctWordPrefabs.Length)];
-            GameObject incorrectWord1 = incorrectWordPrefabs[Random.Range(0, incorrectWordPrefabs.Length)];
-            GameObject incorrectWord2 = incorrectWordPrefabs2[Random.Range(0, incorrectWordPrefabs2.Length)];
-
-            Debug.Log("Correct Word: " + correctWord.name);
-            Debug.Log("Incorrect Word 1: " + incorrectWord1.name);
-            Debug.Log("Incorrect Word 2: " + incorrectWord2.name);
-
-            SpawnWord(correctWord, GetRandomSpawnPoint());
-            SpawnWord(incorrectWord1, GetRandomSpawnPoint());
-            SpawnWord(incorrectWord2, GetRandomSpawnPoint());
-
-            yield return new WaitForSeconds(spawnRate);
-
-            // Clear the highlight for all active words
-            foreach (var word in activeWords)
+            if (Input.anyKeyDown)
             {
-                ClearHighlight(word);
+                foreach (char c in Input.inputString)
+                {
+                    CheckCharacter(c);
+                }
             }
+        }
 
-            // Clear the list of active words
-            activeWords.Clear();
+   private IEnumerator SpawnWords()
+    {
+    while (true)
+    {
+        float startTime = Time.realtimeSinceStartup;
+
+        // Generate new words from the WordLists script
+        wordLists.DisplayWordLists();
+
+        string correctWord = wordLists.Word1.text;
+        string incorrectWord1 = wordLists.Word2.text;
+        string incorrectWord2 = wordLists.Word3.text;
+
+        Debug.Log("Correct Word: " + correctWord);
+        Debug.Log("Incorrect Word 1: " + incorrectWord1);
+        Debug.Log("Incorrect Word 2: " + incorrectWord2);
+
+        UpdateWordOnGameObject(correctWord, GetRandomSpawnPoint());
+        UpdateWordOnGameObject(incorrectWord1, GetRandomSpawnPoint());
+        UpdateWordOnGameObject(incorrectWord2, GetRandomSpawnPoint());
+
+        yield return new WaitForSeconds(spawnrate);  // Keep the words on the screen 
+
+        // Clear the highlight for all active words
+        foreach (var word in activeWords)
+        {
+            ClearHighlight(word);
+            Destroy(word);
+        }
+
+        // Clear the list of active words
+        activeWords.Clear();
+        ClearSpawnPoints();
+
+        // Wait for the next spawn after a short delay (adjust as needed)
+        yield return new WaitForSeconds(1f);
+    }
+}
+
+private void UpdateWordOnGameObject(string word, Transform spawnPoint)
+{
+    if (spawnPoint != null)
+    {
+        Vector3 spawnPosition = spawnPoint.position;
+        GameObject spawnedWordObject = Instantiate(correctWordPrefabs[Random.Range(0, correctWordPrefabs.Length)], spawnPosition, Quaternion.identity);
+
+        // Get the TextMesh component from the instantiated GameObject
+        TextMesh textMesh = spawnedWordObject.GetComponent<TextMesh>();
+
+        if (textMesh != null)
+        {
+            // Update the text of the TextMesh component with the new word
+            textMesh.text = word;
+
+            // Highlight the spawned word
+            HighlightWord(spawnedWordObject);
+
+            Debug.Log("Spawned Word: " + word);
+
+            // Add the spawned word to the list of active words
+            activeWords.Add(spawnedWordObject);
+        }
+        else
+        {
+            Debug.LogError("TextMesh component not found on the spawned word GameObject.");
+        }
+    }
+    else
+    {
+        Debug.LogError("Spawn point is null!");
+    }
+}
+    private void ClearSpawnPoints()
+    {
+        if (spawnPointsUsed != null)
+        {
+            for (int i = 0; i < spawnPointsUsed.Length; i++)
+            {
+                spawnPointsUsed[i] = false;
+            }
         }
     }
 
@@ -132,17 +203,6 @@ public class WordSpawner : MonoBehaviour
         return transform;
     }
 
-    private void Update()
-    {
-        if (Input.anyKeyDown)
-        {
-            foreach (char c in Input.inputString)
-            {
-                CheckCharacter(c);
-            }
-        }
-    }
-
     private void CheckCharacter(char inputChar)
     {
         foreach (var activeWord in activeWords)
@@ -165,15 +225,11 @@ public class WordSpawner : MonoBehaviour
 
     private void HighlightWord(GameObject wordObject)
     {
-        // Add your highlighting logic here
-        // For example, you can change the color or scale of the word
-        // For demonstration purposes, I'll change the color to yellow
         wordObject.GetComponent<Renderer>().material.color = Color.yellow;
     }
 
     private void ClearHighlight(GameObject wordObject)
     {
-        // Clear the highlight (reset the color)
         wordObject.GetComponent<Renderer>().material.color = Color.white;
     }
 }

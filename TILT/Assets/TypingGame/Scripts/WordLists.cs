@@ -21,7 +21,7 @@ public class WordLists : MonoBehaviour
         DisplayWordLists();
     }
 
-    void DisplayWordLists()
+    public void DisplayWordLists()
 {
     if (correctWords.Length > 0 && incorrectWords.Length >= 2)
     {

@@ -504,15 +504,15 @@ MonoBehaviour:
   - gi
   - li
   incorrectWords:
-  - aa
-  - bb
-  - cc
-  - dd
-  - ee
-  - ff
-  - tt
-  - ss
-  - uu
+  - a
+  - b
+  - c
+  - d
+  - e
+  - f
+  - g
+  - h
+  - i
   Word1: {fileID: 6715997528925489986, guid: 3c92ddc323624a445820434d58fd2150, type: 3}
   Word2: {fileID: -3737468855363552731, guid: 29bcddff9e97ca54eb66bb91371f5645, type: 3}
   Word3: {fileID: 3181876918480293281, guid: aa0686edbdcc8814da277cedcd98c974, type: 3}
@@ -593,8 +593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f9db84f6ea5a264ab292c83ac900db8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnRate: 100
-  destroyTimer: 30000
+  spawnrate: 15
   correctWordPrefabs:
   - {fileID: 6024491687223101786, guid: 3c92ddc323624a445820434d58fd2150, type: 3}
   incorrectWordPrefabs:
