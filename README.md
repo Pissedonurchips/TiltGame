@@ -1,10 +1,10 @@
 # Iacula
 All visual assets were hand made using 3ds max apart from the character.
-The darts announcer was generated using autodesk character creation and animated using a Mixamo animation.
-The voices were provided myself and Adam Wallbanks.
-Sounds were aquired from Pixabay any sounds used with a artist attached were included in the credits.
+The darts announcer was generated using Autodesk character creation and animated using a Mixamo animation.
+The voices were provided by myself and Adam Wallbanks.
+Sounds were acquired from Pixabay any sounds used with a artist attached were included in the credits.
 Alex Grohl, Onoychenkomusic, Audio coffee, Music for videos, White records.
-A copy of the licenece agrrement attained is provided below the developer has all the licennces for the music used.
+A copy of the licence agreement attained is provided below the developer has all the licences for the music used.
 PIXABAY LICENSE CERTIFICATE
 ==============================================
 
@@ -40,22 +40,23 @@ For any queries related to this document please contact Pixabay via info@pixabay
 
 ==== THIS IS NOT A TAX RECEIPT OR INVOICE ====
 
-3 Interactble player objects.
-A dart which can be grabbed carried and thrown has collision and physics for all enevironment assets.
+3 Interactive player objects.
+A dart which can be grabbed carried and thrown has collision and physics for all environment assets.
 Crossbow which can be trigger shot producing a projectile dart.
 blow dart which uses voice input as a fire mechanism.
 A foam finger to which can be picked up carried and used to break objects.
 dart board level selectors and the bottles are geometry collection assets utilising fracture levels to create the effect all of these are breakable.
-The drat board has full collion with tage so the announcer knows what score has been achieved.
+The dart board has full collision with tags, so the announcer knows what score has been achieved.
 This score is linked to the voice lines and animation track to ensure the announcer announcers the correct score.
-The juke box are physics boxes all operting under a player blue print script with 15 different sounds to change play pause sound.
-The calculator generates a random number and then recieves input from the physics buttons to work out the score and perform a comparison to check if the score has been achioeved and how many darts have been used.
-The trailer was edited by myself using music credited by the artists above, and edited in Clipchamp using standar clipchamp transitions and text options.
+The juke box are physics boxes all operating under a player blueprint script with 15 different sounds to change play pause sound.
+The calculator generates a random number and then receives input from the physics buttons to work out the score and perform a comparison to check if the score has been achieved and how many darts have been used.
+The trailer was edited by myself using music credited by the artists above, and edited in Clipchamp using standard Clipchamp transitions and text options.
 There are three idents featured two are flags also included inside the game itself one for NTU and one for Cyprinus(myself) the developer.
-A seperate ident filmed using Unreal level sequencer of the NTU logo shattering when hit by the real life dart.
+A separate ident filmed using Unreal level sequencer of the NTU logo shattering when hit by the real-life dart.
 The incorporation of real world and virtual world assets represents the relationship between the two.
-Refrences
+References
 Checa, David & Bustillo, Andrés. (2020). A Review of Immersive Virtual Reality Serious Games to enhance Learning and Training. Multimedia Tools and Applications. 79. 10.1007/s11042-019-08348-9. 
 Lei, Hao & Cui, Yunhuo & Zhou, Wenye. (2018). Relationships between student engagement and academic achievement: A meta-analysis. Social Behavior and Personality: an international journal. 46. 517-528. 10.2224/sbp.7054. Lei, Hao & Cui, Yunhuo & Zhou, Wenye. (2018). Relationships between student engagement and academic achievement: A meta-analysis. Social Behavior and Personality: an international journal. 46. 517-528. 10.2224/sbp.7054. 
 Fromm, Jennifer & Radianti, Jaziar & Wehking, Charlotte & Stieglitz, Stefan & Majchrzak, Tim A. & Brocke, Jan vom. (2021). More than experience? - On the unique opportunities of virtual reality to afford a holistic experiential learning cycle. The Internet and Higher Education. 50. 100804. 10.1016/j.iheduc.2021.100804. 
+
 
